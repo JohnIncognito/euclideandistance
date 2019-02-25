@@ -1,0 +1,20 @@
+%MATLAB CUSTOM CODE JOHN DODDS 2019
+%segmentation
+FI = imread('CONTROL lamp1 2311 aaa.tif');
+%gamma correction
+J = imadjust(FI,[],[],1.75);
+imshow(J);
+%CALCULATION OF CLUSTERING
+%Data import
+ROTdata = readtable('datarotenone.xlsx');
+%Coordinates from apporpriate Excel file
+X = [ROTdata.X];
+Y = [ROTdata.Y];
+XY = [ROTdata.X, ROTdata.Y];
+%determination of centroid
+centroidXY = mean(XY);
+centroidX = mean(X);
+centroidY = mean(Y);
+%Calculate Euclidean Distance
+dist = pdist2(XY, centroidXY, 'euclidean');
+meandis = mean(dist);
